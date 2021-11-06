@@ -3,14 +3,14 @@
 int ft_strlen(char *str)
 {
 	int i ;
-	 i=0;
-	
-	  while(str[i])
-	  	i++;
-	  return (i);
+	i=0;
+
+	while(str[i])
+		i++;
+	return (i);
 }
 
- int check_ln(char *str)
+int check_ln(char *str)
 {
 	int i;
 
@@ -37,6 +37,25 @@ int ft_strcpy(char *dst,const char *src)
 	dst[i] = '\0';
 	return(i);
 }
+
+int	ft_strcpy_b_zero(char *dst, const char *src)
+{
+	int i;
+
+	i = 0;
+	while(src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while (i < BUFFER_SIZE)
+	{
+		dst[i] = '\0';
+		i++;
+	}
+	return(i);
+}
+
 char *ft_strdup(char *str)
 {
 	int i;
@@ -44,14 +63,14 @@ char *ft_strdup(char *str)
 
 	if (!(rslt = malloc(sizeof(str) * (ft_strlen(str)+1))))
 		return(NULL);
-	 i = 0;
-	 while(str[i])
+	i = 0;
+	while(str[i])
 	{
 		rslt[i] = str[i];
 		i++;
 	}
-	 rslt[i]='\0';
-	 return (rslt);
+	rslt[i]='\0';
+	return (rslt);
 }
 
 char *ft_strjoin(char *str1, char *str2)
@@ -63,7 +82,7 @@ char *ft_strjoin(char *str1, char *str2)
 		return(NULL);
 	i = ft_strlen(str1);
 	j = ft_strlen(str2);
-	if(!(rslt = malloc (sizeof(char) * (i+j+1))))
+	if(!(rslt = malloc(sizeof(char) * (i+j+1))))
 		return(NULL);
 	i = 0;
 	j = 0;
@@ -84,7 +103,7 @@ char *ft_strjoin(char *str1, char *str2)
 	return (rslt);
 }
 
- char * get_next_line(int fd)
+char * get_next_line(int fd)
 {
 	static char buff[BUFFER_SIZE] = {0};
 	char *line;
@@ -101,18 +120,18 @@ char *ft_strjoin(char *str1, char *str2)
 	i = 0;
 	rt = 1;
 
-	while(1)
+	while(rt > 0)
 	{
-		if((i = check_ln(buff)) != -1 || rt == 0)
+		if((i = check_ln(buff)) != -1)
 		{
 			tofree = line;
-			k =ft_strlen(line);
+			k = ft_strlen(line);
 			line = ft_strjoin(line,buff);
 			free(tofree);
 			line[k+i+1] = '\0';
 			if (i == -1)
 				buff[0] = '\0';
-			ft_strcpy(buff,&buff[i+1]);
+			ft_strcpy_b_zero(buff,&buff[i+1]);
 			if(*line == '\0')
 			{
 				free(line);
@@ -126,12 +145,8 @@ char *ft_strjoin(char *str1, char *str2)
 			line = ft_strjoin(line,buff);
 			free(tofree);
 			rt = read(fd,buff,BUFFER_SIZE);
-			if (rt == -1)
-				return(NULL);
 		}
 	}
-return(line);
-
-
+	free(line);
+	return(NULL);
 }
-

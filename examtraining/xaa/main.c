@@ -70,7 +70,6 @@ int     main()
 
     system("leaks a.out");
     while(1) ;
+
 	return (0);
-
-
 }
