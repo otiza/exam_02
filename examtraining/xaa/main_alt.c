@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_alt.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adelille <adelille@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 19:14:46 by adelille          #+#    #+#             */
-/*   Updated: 2021/11/06 10:26:36 by adelille         ###   ########.fr       */
+/*   Updated: 2021/11/06 12:34:59 by adelille         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ int	main(int ac, char **av)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
+		printf("Error: Can't open \"%s\"\n", file);
 		free(file);
-		return (printf("Error: Can't open \"%s\"\n", file) * 0 + 1);
+		return (1);
 	}
 
 	line = get_next_line(fd);
