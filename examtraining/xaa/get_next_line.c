@@ -2,8 +2,8 @@
 
 int ft_strlen(char *str)
 {
-	int i ;
-	i=0;
+	int	i;
+	i = 0;
 
 	while(str[i])
 		i++;
@@ -82,24 +82,24 @@ char *ft_strjoin(char *str1, char *str2)
 		return(NULL);
 	i = ft_strlen(str1);
 	j = ft_strlen(str2);
-	if(!(rslt = malloc(sizeof(char) * (i+j+1))))
+	if (!(rslt = malloc(sizeof(char) * (i+j+1))))
 		return(NULL);
 	i = 0;
 	j = 0;
-	while ( str1[i])
+	while (str1[i])
 	{
-		rslt[j] =str1[i];
+		rslt[j] = str1[i];
 		j++;
 		i++;
 	}
 	i = 0;
-	while(str2[i])
+	while (str2[i])
 	{
 		rslt[j] = str2[i];
 		j++;
 		i++;
 	}
-	rslt [j] = '\0';
+	rslt[j] = '\0';
 	return (rslt);
 }
 
